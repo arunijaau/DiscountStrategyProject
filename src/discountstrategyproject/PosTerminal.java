@@ -16,8 +16,8 @@ public class PosTerminal {
         this.invoice = new Invoice(customerId, db);
     }
 
-    public final void addItemToTransaction(String a100, int i) {
-        
+    public final void addItemToTransaction(String productId, int quantity, InvoiceDataAccessStrategy db) {
+        this.invoice.addLineItem(productId, quantity, db);
     }
 
     public final void endTransaction() {

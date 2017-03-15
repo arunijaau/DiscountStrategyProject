@@ -21,7 +21,7 @@ public class InMemoryDataAccess implements InvoiceDataAccessStrategy {
     }
 
     @Override
-    public Customer findCustomer(final String customerId) {
+    public final Customer findCustomer(final String customerId) {
         if (customerId == null || customerId.isEmpty()) {
             throw new IllegalArgumentException("Error: Customer ID should not be null or empty.");
         }
@@ -34,6 +34,13 @@ public class InMemoryDataAccess implements InvoiceDataAccessStrategy {
             }
         }
         return customer;
+    }
+
+    @Override
+    public final Product findProduct(final String productId) {
+        
+        
+        return null;
     }
 
 }

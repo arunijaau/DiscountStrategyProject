@@ -12,5 +12,7 @@ package discountstrategyproject;
 public interface InvoiceDataAccessStrategy {
 
     public abstract Customer findCustomer(String customerId);
+
+    public abstract Product findProduct(String productId);
     
 }

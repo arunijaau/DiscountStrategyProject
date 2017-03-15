@@ -14,23 +14,29 @@ public class Customer {
     private String customerId;
 
     public Customer(String customerId, String name) {
-        this.name = name;
-        this.customerId = customerId;
+        this.setName(name);
+        this.setCustomerId(customerId);
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
+        if(name == null || name.isEmpty()){
+            throw new IllegalArgumentException("Error: Customer name cannot be null or empty.");
+        }
         this.name = name;
     }
 
-    public String getCustomerId() {
+    public final String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public final void setCustomerId(String customerId) {
+        if(customerId == null || customerId.isEmpty()){
+            throw new IllegalArgumentException("Error: Customer ID cannot be null or empty.");
+        }
         this.customerId = customerId;
     }
     

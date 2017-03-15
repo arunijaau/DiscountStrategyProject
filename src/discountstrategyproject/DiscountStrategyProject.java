@@ -19,7 +19,7 @@ public class DiscountStrategyProject {
         PosTerminal pos = new PosTerminal();
         
         pos.startTransaction("100",db);
-        pos.addItemToTransaction("A100", 2);
+        pos.addItemToTransaction("A100", 2, db);
         pos.addItemToTransaction("A101", 2);
         pos.endTransaction();
     }
