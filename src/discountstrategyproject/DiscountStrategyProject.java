@@ -18,11 +18,11 @@ public class DiscountStrategyProject {
         ReceiptDataAccessStrategy db = new InMemoryDataAccess();
         DisplayOutputStrategy output1 = new GuiOutputStrategy();
         DisplayOutputStrategy output2 = new ConsoleOutputStrategy();
-        PosTerminal pos = new PosTerminal(output1, output2);
+        PosTerminal pos = new PosTerminal(db, output1, output2);
         
-        pos.startTransaction("100",db);
-        pos.addItemToTransaction("A100", 2, db);
-        pos.addItemToTransaction("A101", 2, db);
+        pos.startTransaction("100");
+        pos.addItemToTransaction("A100", 2);
+        pos.addItemToTransaction("A101", 2);
         pos.endTransaction();
     }
 }

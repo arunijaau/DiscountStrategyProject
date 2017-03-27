@@ -11,23 +11,26 @@ package discountstrategyproject;
  */
 public class PosTerminal {
     private Receipt receipt;
+    private ReceiptDataAccessStrategy db;
     private DisplayOutputStrategy output1;
     private DisplayOutputStrategy output2;
 
-    public PosTerminal(DisplayOutputStrategy output1, DisplayOutputStrategy output2) {
+    public PosTerminal(ReceiptDataAccessStrategy db,DisplayOutputStrategy output1, DisplayOutputStrategy output2) {
+        this.db = db;
         this.output1 = output1;
         this.output2 = output2;
     }
 
-    public final void startTransaction(String customerId, ReceiptDataAccessStrategy db) {
+    public final void startTransaction(String customerId) {
         this.receipt = new Receipt(customerId, db);
     }
 
-    public final void addItemToTransaction(String productId, int quantity, ReceiptDataAccessStrategy db) {
-        this.receipt.addLineItem(productId, quantity, db);
+    public final void addItemToTransaction(String productId, int quantity) {
+        this.receipt.addLineItem(productId, quantity);
     }
 
     public final void endTransaction() {
+        db.saveReceipt(receipt);
         output1.displayOutput(receipt.getReceiptData());
         output2.displayOutput(receipt.getReceiptData());
     }

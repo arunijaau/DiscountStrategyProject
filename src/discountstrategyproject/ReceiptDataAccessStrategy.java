@@ -14,5 +14,9 @@ public interface ReceiptDataAccessStrategy {
     public abstract Customer findCustomer(String customerId);
 
     public abstract Product findProduct(String productId);
+
+    public abstract void saveReceipt(Receipt receipt);
+
+    public abstract int getNextReceiptNumber();
     
 }
