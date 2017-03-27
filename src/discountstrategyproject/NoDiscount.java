@@ -13,8 +13,8 @@ public class NoDiscount implements ProductDiscountStrategy {
 
    
     @Override
-    public double getDiscountAmount(double price, int quantity) {
-        
+    public final double getDiscountAmount(final double price, final int quantity) {
+        return 0;
     }
     
 }
