@@ -9,10 +9,12 @@ package discountstrategyproject;
  *
  * @author Aruni
  */
-public interface InvoiceDataAccessStrategy {
+public class QtyDiscount implements ProductDiscountStrategy {
 
-    public abstract Customer findCustomer(String customerId);
-
-    public abstract Product findProduct(String productId);
+    
+    @Override
+    public double getDiscountAmount(double price, int quantity) {
+       
+    }
     
 }
