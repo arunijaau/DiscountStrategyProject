@@ -15,6 +15,7 @@ public class DiscountStrategyProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Store store1 = new Store("Kohls");
         ReceiptDataAccessStrategy db = new InMemoryDataAccess();
         DisplayOutputStrategy output1 = new GuiOutputStrategy();
         DisplayOutputStrategy output2 = new ConsoleOutputStrategy();

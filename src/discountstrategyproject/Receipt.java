@@ -10,12 +10,12 @@ package discountstrategyproject;
  * @author Aruni
  */
 public class Receipt {
-    private final Customer customer;
+    private Customer customer;
     private LineItem[] lineItems;
     private Store store;
     private ReceiptDataAccessStrategy db;
     private final int receiptNumber;
-    private String newLine = "\n";
+    private static final String NEW_LINE = "\n";
 
     public Receipt(String customerId, ReceiptDataAccessStrategy db) {
         this.db = db;
@@ -29,9 +29,10 @@ public class Receipt {
 
     public final void addLineItem(String productId, int quantity) {
         LineItem item = new LineItem(productId, quantity, db);
+        addItemToArray(item);
     }
         
-    public final void addItemToArray(final LineItem item){
+    private void addItemToArray(final LineItem item){
         LineItem[] tempItems = new LineItem[lineItems.length + 1];
         for(int i = 0; i <lineItems.length; i++){
             tempItems[i] = lineItems[i];
@@ -42,14 +43,21 @@ public class Receipt {
     }
     
     public final String getReceiptData(){
+        double netTotal = 0;
+        double totalDiscountAmt = 0;
         String receiptData = "";
-        receiptData += getGreetingMessage() + newLine + newLine;
-        receiptData += "Sold to: " + customer.getName() + newLine;
-        receiptData += "Receipt No.: " + getReceiptNumber();
+        receiptData += getGreetingMessage() + NEW_LINE + NEW_LINE;
+        receiptData += "Sold to: " + getCustomerName() + NEW_LINE;
+        receiptData += "Receipt No.: " + getReceiptNumber() + NEW_LINE;
+        receiptData += getColumnHeading() + NEW_LINE;
         for(LineItem item: lineItems){
-            receiptData += item.getLineItemData() + newLine;
+            receiptData += item.getLineItemData() + NEW_LINE;
+            netTotal += item.getSubTotal();
+            totalDiscountAmt += item.getDiscountAmount();
         }
-        
+        receiptData += netTotal + NEW_LINE;
+        receiptData += totalDiscountAmt;
+        receiptData += getCalculatedGrandTotal(netTotal,totalDiscountAmt);
         return receiptData;
     }
 
@@ -58,6 +66,19 @@ public class Receipt {
     }
     
     private String getGreetingMessage(){
-        return "Thank you for shopping at " + store.getStoreName();
+        return "Thank you for shopping at " + store.getStoreName() + "!";
+    }
+    
+    private String getCustomerName(){
+        return (customer.getName()== null)? "" : customer.getName();
+    }
+    
+    private String getColumnHeading(){
+        return "ID\tItem";
+    }
+    
+    private double getCalculatedGrandTotal(double netTotal,double totalDiscountAmt){
+        return netTotal - totalDiscountAmt;
     }
 }
+

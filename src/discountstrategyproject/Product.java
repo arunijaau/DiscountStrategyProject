@@ -14,13 +14,25 @@ public class Product {
     private String productId;
     private String productName;
     private double price;
-    private ProductDiscountStrategy discount;
+    private ProductDiscountStrategy discountStrategy;
+   
 
-    public Product(String productId, String productName, double price, ProductDiscountStrategy discount) {
+    public Product(String productId, String productName, double price, ProductDiscountStrategy discountStrategy) {
         this.setProductId(productId);
         this.setProductName(productName);
         this.setPrice(price);
-        this.setDiscountAmount(discount);
+        this.setDiscountStrategy(discountStrategy);
+    }
+
+    public ProductDiscountStrategy getDiscountStrategy() {
+        return discountStrategy;
+    }
+
+    public void setDiscountStrategy(ProductDiscountStrategy discountStrategy) {
+        if(discountStrategy == null){
+            throw new IllegalArgumentException("Discount strategy should not be null.");
+        }
+        this.discountStrategy = discountStrategy;
     }
 
     
@@ -58,15 +70,9 @@ public class Product {
         this.price = price;
     }
     
-    public ProductDiscountStrategy getDiscountAmount() {
-        return discount;
+    public double getCalculatedDiscountAmount(double price, int qty) {
+        return discountStrategy.getDiscountAmount(price, qty);
     }
 
-    public void setDiscountAmount(ProductDiscountStrategy discount) {
-        if(discount == null){
-            throw new IllegalArgumentException("Error: discount strategy should not be null.");
-        }
-        this.discount = discount;
-    }
-    
+   
 }

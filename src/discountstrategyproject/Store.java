@@ -12,6 +12,10 @@ package discountstrategyproject;
 public class Store {
     private String storeName;
 
+   public Store(String name) {
+        this.setStoreName(name);
+    }
+
     public String getStoreName() {
         return storeName;
     }
