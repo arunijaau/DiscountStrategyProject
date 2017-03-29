@@ -6,6 +6,7 @@
 package discountstrategyproject;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -16,7 +17,7 @@ public class GuiOutputStrategy implements DisplayOutputStrategy{
    
     @Override
     public final void displayOutput(final String receiptData) {
-        JOptionPane.showMessageDialog(null, receiptData);
+        JOptionPane.showMessageDialog(null, new JTextArea(receiptData));
     }
     
 }

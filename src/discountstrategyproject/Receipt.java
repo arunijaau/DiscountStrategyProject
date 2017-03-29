@@ -85,7 +85,7 @@ public class Receipt {
     }
     
     private double getCalculatedGrandTotal(double netTotal,double totalDiscountAmt){
-        return netTotal - totalDiscountAmt;
+        return (netTotal - totalDiscountAmt);
     }
 }
 
