@@ -20,10 +20,13 @@ public class LineItem {
     }
 
     private Product findProduct(String productId, ReceiptDataAccessStrategy db) {
+        if(db.findProduct(productId) == null){
+            throw new IllegalArgumentException("Error: Product ID: " + productId + " could not be found in the current products list.");
+        }
         return db.findProduct(productId);
     }
     
-    public String getLineItemData(){
+    public final String getLineItemData(){
         String itemData = "";
         itemData += product.getProductId() + COLUMN_SPACE_CHARACTER;
         itemData += product.getProductName() + COLUMN_SPACE_CHARACTER;
@@ -34,26 +37,26 @@ public class LineItem {
         return itemData;
     }
     
-    public double getSubTotal(){
+    public final double getSubTotal(){
         return product.getPrice() * this.quantity;
     }
 
-    public Product getProduct() {
+    public final Product getProduct() {
         return product;
     }
 
-    public int getQuantity() {
+    public final int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public final void setQuantity(int quantity) {
         if(quantity < 0){
             throw new IllegalArgumentException("Error: Quantity should not be less than 0.");
         }
         this.quantity = quantity;
     }
     
-    public double getDiscountAmount(){
+    public final double getDiscountAmount(){
         return product.getDiscountStrategy().getDiscountAmount(product.getPrice(), quantity);
     }
     

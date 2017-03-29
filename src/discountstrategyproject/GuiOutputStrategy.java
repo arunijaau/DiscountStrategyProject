@@ -5,6 +5,8 @@
  */
 package discountstrategyproject;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aruni
@@ -13,8 +15,8 @@ public class GuiOutputStrategy implements DisplayOutputStrategy{
 
    
     @Override
-    public void displayOutput(String receiptData) {
-        
+    public final void displayOutput(final String receiptData) {
+        JOptionPane.showMessageDialog(null, receiptData);
     }
     
 }

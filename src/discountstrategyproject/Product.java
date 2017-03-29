@@ -24,11 +24,11 @@ public class Product {
         this.setDiscountStrategy(discountStrategy);
     }
 
-    public ProductDiscountStrategy getDiscountStrategy() {
+    public final ProductDiscountStrategy getDiscountStrategy() {
         return discountStrategy;
     }
 
-    public void setDiscountStrategy(ProductDiscountStrategy discountStrategy) {
+    public final void setDiscountStrategy(ProductDiscountStrategy discountStrategy) {
         if(discountStrategy == null){
             throw new IllegalArgumentException("Discount strategy should not be null.");
         }
@@ -37,42 +37,40 @@ public class Product {
 
     
     
-    public String getProductId() {
+    public final String getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public final void setProductId(String productId) {
         if(productId == null || productId.isEmpty()){
             throw new IllegalArgumentException("Error: Product ID should not be null or empty.");
         }
         this.productId = productId;
     }
 
-    public String getProductName() {
+    public final String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
+    public final void setProductName(String productName) {
         if(productName == null || productName.isEmpty()){
             throw new IllegalArgumentException("Error: Product name should not be null or empty.");
         }
         this.productName = productName;
     }
     
-    public double getPrice() {
+    public final double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        if(price >= 0){
+    public final void setPrice(double price) {
+        if(price <= 0){
             throw new IllegalArgumentException("Error: Product price should not be less than 0.");
         }
         this.price = price;
     }
     
-    public double getCalculatedDiscountAmount(double price, int qty) {
-        return discountStrategy.getDiscountAmount(price, qty);
-    }
+    
 
    
 }

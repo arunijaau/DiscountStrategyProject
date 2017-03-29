@@ -17,13 +17,18 @@ public class Receipt {
     private final int receiptNumber;
     private static final String NEW_LINE = "\n";
 
-    public Receipt(String customerId, ReceiptDataAccessStrategy db) {
+    public Receipt(Store store, String customerId, ReceiptDataAccessStrategy db) {
         this.db = db;
-        this.receiptNumber = db.getNextReceiptNumber();
+        this.lineItems = new LineItem[0];
         this.customer = findCustomer(customerId);
+        this.receiptNumber = db.getNextReceiptNumber();
+        this.store = store;
     }
     
     private Customer findCustomer(String customerId){
+        if(db.findCustomer(customerId) == null){
+            throw new IllegalArgumentException("Error: Customer ID " + customerId + " could not be found in the current customer's list.");
+        }
         return db.findCustomer(customerId);
     }
 
@@ -50,13 +55,15 @@ public class Receipt {
         receiptData += "Sold to: " + getCustomerName() + NEW_LINE;
         receiptData += "Receipt No.: " + getReceiptNumber() + NEW_LINE;
         receiptData += getColumnHeading() + NEW_LINE;
+        receiptData += "-------------------------------------------------------------------------" + NEW_LINE;
         for(LineItem item: lineItems){
             receiptData += item.getLineItemData() + NEW_LINE;
             netTotal += item.getSubTotal();
             totalDiscountAmt += item.getDiscountAmount();
         }
+        receiptData += "---------" + NEW_LINE;;
         receiptData += netTotal + NEW_LINE;
-        receiptData += totalDiscountAmt;
+        receiptData += totalDiscountAmt + NEW_LINE;;
         receiptData += getCalculatedGrandTotal(netTotal,totalDiscountAmt);
         return receiptData;
     }
@@ -70,11 +77,11 @@ public class Receipt {
     }
     
     private String getCustomerName(){
-        return (customer.getName()== null)? "" : customer.getName();
+        return ((customer.getName()== null)? "" : customer.getName());
     }
     
     private String getColumnHeading(){
-        return "ID\tItem";
+        return "ID\tItem\t\t\tPrice\tQty\tSubtotal\tDiscount";
     }
     
     private double getCalculatedGrandTotal(double netTotal,double totalDiscountAmt){

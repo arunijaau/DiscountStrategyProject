@@ -23,11 +23,11 @@ public class QtyDiscount implements ProductDiscountStrategy {
        return (quantity >= this.minimumQuantity)? (getCalculatedDiscountAmount(price,quantity)): 0;
     }
     
-    public double getPercentOff() {
+    public final double getPercentOff() {
         return percentOff;
     }
 
-    public void setPercentOff(double percentOff) {
+    public final void setPercentOff(double percentOff) {
         if(percentOff <= 0 || percentOff > 1){
             throw new IllegalArgumentException("Error: Percent-off discount cannot be less than or equal to 0 or greater than 1.");
         }

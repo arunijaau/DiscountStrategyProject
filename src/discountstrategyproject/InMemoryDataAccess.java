@@ -63,7 +63,7 @@ public class InMemoryDataAccess implements ReceiptDataAccessStrategy {
     }
 
     @Override
-    public void saveReceipt(Receipt receipt) {
+    public final void saveReceipt(final Receipt receipt) {
         Receipt[] tempReceipts = new Receipt[receiptsGenerated.length + 1];
         for(int i = 0; i < receiptsGenerated.length; i++){
             tempReceipts[i] = receiptsGenerated[i];
@@ -75,7 +75,7 @@ public class InMemoryDataAccess implements ReceiptDataAccessStrategy {
     }
 
     @Override
-    public int getNextReceiptNumber() {
+    public final int getNextReceiptNumber() {
         int maxNum = 0;
         for(Receipt rec: receiptsGenerated){
             if(rec.getReceiptNumber()> maxNum){
