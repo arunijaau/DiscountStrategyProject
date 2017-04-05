@@ -18,11 +18,11 @@ public class Receipt {
     private static final String NEW_LINE = "\n";
 
     public Receipt(Store store, String customerId, ReceiptDataAccessStrategy db) {
-        this.db = db;
+        this.setDb(db);
         this.lineItems = new LineItem[0];
         this.customer = findCustomer(customerId);
-        this.receiptNumber = db.getNextReceiptNumber();
-        this.store = store;
+        this.receiptNumber = this.getDb().getNextReceiptNumber();
+        this.setStore(store);
     }
     
     private Customer findCustomer(String customerId){
@@ -73,7 +73,7 @@ public class Receipt {
     }
     
     private String getGreetingMessage(){
-        return "Thank you for shopping at " + store.getStoreName() + "!";
+        return "Thank you for shopping at " + this.getStore().getStoreName() + "!";
     }
     
     private String getCustomerName(){
@@ -87,5 +87,29 @@ public class Receipt {
     private double getCalculatedGrandTotal(double netTotal,double totalDiscountAmt){
         return (netTotal - totalDiscountAmt);
     }
+
+    public final ReceiptDataAccessStrategy getDb() {
+        return db;
+    }
+
+    public final void setDb(ReceiptDataAccessStrategy db) {
+        if (db == null) {
+            throw new IllegalArgumentException("Error: Database should not be null.");
+        }
+        this.db = db;
+    }
+
+    public final Store getStore() {
+        return store;
+    }
+
+    public final void setStore(Store store) {
+        if (store == null) {
+            throw new IllegalArgumentException("Error: Store should not be null.");
+        }
+        this.store = store;
+    }
+    
+    
 }
 

@@ -16,11 +16,11 @@ public class Store {
         this.setStoreName(name);
     }
 
-    public String getStoreName() {
+    public final String getStoreName() {
         return storeName;
     }
 
-    public void setStoreName(String storeName) {
+    public final void setStoreName(String storeName) {
         if(storeName == null || storeName.isEmpty()){
             throw new IllegalArgumentException("Error: Store name should not be null or empty.");
         }

@@ -16,7 +16,7 @@ public class LineItem {
     
     public LineItem(String productId, int quantity, ReceiptDataAccessStrategy db) {
         this.product = findProduct(productId, db);
-        this.quantity = quantity;
+        this.setQuantity(quantity);
     }
 
     private Product findProduct(String productId, ReceiptDataAccessStrategy db) {
@@ -31,7 +31,7 @@ public class LineItem {
         itemData += product.getProductId() + COLUMN_SPACE_CHARACTER;
         itemData += product.getProductName() + COLUMN_SPACE_CHARACTER;
         itemData += product.getPrice() + COLUMN_SPACE_CHARACTER;
-        itemData += quantity + COLUMN_SPACE_CHARACTER;
+        itemData += this.quantity + COLUMN_SPACE_CHARACTER;
         itemData += getSubTotal() + COLUMN_SPACE_CHARACTER;
         itemData += getDiscountAmount();       
         return itemData;
@@ -46,18 +46,18 @@ public class LineItem {
     }
 
     public final int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
-    public final void setQuantity(int quantity) {
-        if(quantity < 0){
-            throw new IllegalArgumentException("Error: Quantity should not be less than 0.");
+    public final void setQuantity(int qty) {
+        if(qty <= 0){
+            throw new IllegalArgumentException("Error: Quantity should be greater than 0.");
         }
-        this.quantity = quantity;
+        this.quantity = qty;
     }
     
     public final double getDiscountAmount(){
-        return product.getDiscountStrategy().getDiscountAmount(product.getPrice(), quantity);
+        return product.getDiscountStrategy().getDiscountAmount(product.getPrice(), this.quantity);
     }
     
 }

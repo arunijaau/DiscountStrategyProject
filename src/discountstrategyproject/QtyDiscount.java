@@ -15,7 +15,7 @@ public class QtyDiscount implements ProductDiscountStrategy {
 
     public QtyDiscount(double percentOff, int minQuantity) {
         this.setPercentOff(percentOff);
-        this.setQuantity(minQuantity);
+        this.setMinimumQuantity(minQuantity);
     }
     
     @Override
@@ -34,7 +34,7 @@ public class QtyDiscount implements ProductDiscountStrategy {
         this.percentOff = percentOff;
     }
 
-    private void setQuantity(int minQty) {
+    private void setMinimumQuantity(int minQty) {
         if(minQty <= 0){
             throw new IllegalArgumentException("Error: Quantity should be greater than 0.");
         }
