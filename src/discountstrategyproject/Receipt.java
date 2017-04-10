@@ -25,7 +25,7 @@ public class Receipt {
         this.setStore(store);
     }
     
-    private Customer findCustomer(String customerId){
+    private Customer findCustomer(String customerId) throws IllegalArgumentException {
         if(db.findCustomer(customerId) == null){
             throw new IllegalArgumentException("Error: Customer ID " + customerId + " could not be found in the current customer's list.");
         }
