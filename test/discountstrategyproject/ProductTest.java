@@ -48,12 +48,12 @@ public class ProductTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetProductIdShouldNotBeNull() {
-        instance.setProductId("");
+        instance.setProductId(null);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testSetProductIdShouldNotBeEmpty() {
-        instance.setProductId(" ");
+        instance.setProductId("");
     }
 
 //    @Test

@@ -20,6 +20,9 @@ public class QtyDiscount implements ProductDiscountStrategy {
     
     @Override
     public final double getDiscountAmount(final double price, final int quantity) {
+        if(price <= 0 || quantity <= 0){
+            throw new IllegalArgumentException("Product price and quantity should be greater than zero.");
+        }
        return (quantity >= this.minimumQuantity)? (getCalculatedDiscountAmount(price,quantity)): 0;
     }
     
