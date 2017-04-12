@@ -28,7 +28,7 @@ public class Product {
         return discountStrategy;
     }
 
-    public final void setDiscountStrategy(ProductDiscountStrategy discountStrategy) {
+    public final void setDiscountStrategy(ProductDiscountStrategy discountStrategy) throws IllegalArgumentException {
         if(discountStrategy == null){
             throw new IllegalArgumentException("Discount strategy should not be null.");
         }
@@ -41,7 +41,7 @@ public class Product {
         return productId;
     }
 
-    public final void setProductId(String productId) {
+    public final void setProductId(String productId) throws IllegalArgumentException {
         if(productId == null || productId.isEmpty()){
             throw new IllegalArgumentException("Error: Product ID should not be null or empty.");
         }
@@ -52,7 +52,7 @@ public class Product {
         return productName;
     }
 
-    public final void setProductName(String productName) {
+    public final void setProductName(String productName) throws IllegalArgumentException {
         if(productName == null || productName.isEmpty()){
             throw new IllegalArgumentException("Error: Product name should not be null or empty.");
         }
@@ -63,7 +63,7 @@ public class Product {
         return price;
     }
 
-    public final void setPrice(double price) {
+    public final void setPrice(double price) throws IllegalArgumentException {
         if(price <= 0){
             throw new IllegalArgumentException("Error: Product price should not be less than 0.");
         }

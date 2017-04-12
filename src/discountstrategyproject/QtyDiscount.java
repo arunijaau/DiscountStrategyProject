@@ -19,7 +19,7 @@ public class QtyDiscount implements ProductDiscountStrategy {
     }
     
     @Override
-    public final double getDiscountAmount(final double price, final int quantity) {
+    public final double getDiscountAmount(final double price, final int quantity) throws IllegalArgumentException {
         if(price <= 0 || quantity <= 0){
             throw new IllegalArgumentException("Product price and quantity should be greater than zero.");
         }
@@ -30,14 +30,14 @@ public class QtyDiscount implements ProductDiscountStrategy {
         return percentOff;
     }
 
-    public final void setPercentOff(double percentOff) {
+    public final void setPercentOff(double percentOff) throws IllegalArgumentException {
         if(percentOff <= 0 || percentOff > 1){
             throw new IllegalArgumentException("Error: Percent-off discount cannot be less than or equal to 0 or greater than 1.");
         }
         this.percentOff = percentOff;
     }
 
-    public final void setMinimumQuantity(int minQty) {
+    public final void setMinimumQuantity(int minQty) throws IllegalArgumentException{
         if(minQty <= 0){
             throw new IllegalArgumentException("Error: Quantity should be greater than 0.");
         }
