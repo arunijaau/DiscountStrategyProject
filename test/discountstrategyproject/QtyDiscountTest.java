@@ -103,8 +103,6 @@ public class QtyDiscountTest {
         assertEquals(expected,actual,0.009);
     }
     
-       
-    
     @Test
     public void testGetDiscountAmountShouldNotBeZeroWithQtyGreaterThanMinQty(){
         QtyDiscount discount = new QtyDiscount(0.2, 4);
